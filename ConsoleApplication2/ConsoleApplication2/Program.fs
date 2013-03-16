@@ -1,4 +1,4 @@
-﻿// Learn more about F# at http://fsharp.net
+// Learn more about F# at http://fsharp.net
 // See the 'F# Tutorial' project for more help.
 open Microsoft.Xna.Framework
 open Microsoft.Xna.Framework.Graphics
@@ -27,6 +27,14 @@ open Casanova.StandardLibrary.Core
       static member Position'(self:Ship,dt:float32<s>) = !self.Position + dt * !self.Velocity
       static member Velocity'(self:Ship,dt:float32<s>) = !self.Velocity * 0.9f
       static member SpritePosition'(self:Ship) = !self.Position * 1.0f<pixel/m>
+      
+   and [<CasanovaEntity>] Ball = {
+        Position : Rule<Vector2<m>>
+        Velocity : Rule<Vector2<m/s>>
+        Sprite   : DrawableSprite
+   } with
+     static member Position'(self:Ball,dt:float32<s>) = !self.Position + dt * !self.Velocity
+     static member SpritePosition'(self:Ball) = !self.Position * 1.0f<pixel/m>
 
 let start_game (game:StartGameArgs) =
 
